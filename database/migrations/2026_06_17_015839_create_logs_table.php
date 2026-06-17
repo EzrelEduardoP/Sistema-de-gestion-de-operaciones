@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
+            //si se borra usuarios se eliminaran los logs de este
+            $table->foreignId('user_id')
+                    ->constrained('users')
+                    ->onDelete('cascade');
+
+            $table->string('action');
+            $table->text('description');
             $table->timestamps();
+
         });
     }
 

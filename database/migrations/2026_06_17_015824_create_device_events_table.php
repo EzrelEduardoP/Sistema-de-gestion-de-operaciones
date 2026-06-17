@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('device_events', function (Blueprint $table) {
             $table->id();
+            //si se borra un dispositivo este borrara los eventos del mismo dispositivo
+            $table->foreignId('device_id')
+                    ->constrained('devices')
+                    ->onDelete('cascade');
+
+            $table->string('type');
             $table->timestamps();
         });
     }

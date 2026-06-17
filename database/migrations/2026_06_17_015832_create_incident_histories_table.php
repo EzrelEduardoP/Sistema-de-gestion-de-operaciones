@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('incident_histories', function (Blueprint $table) {
             $table->id();
+            //si se borra las incidencias tambien se borrara el historial del dispositivo
+            $table->foreignId('incident_id')
+                    ->constrained('incidents')
+                    ->onDelete('cascade');
+
+            $table->string('new_status');
+            $table->string('old_status');
+
+            //se hizo una llave foranea para usuarios, para que se vea quien fue el usuario
+            $table->foreignId('changed_by')
+                    ->constrained('users')
+                    ->onDelete('restrict');
+
             $table->timestamps();
         });
     }

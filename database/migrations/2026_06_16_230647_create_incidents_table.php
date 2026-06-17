@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('incidents', function (Blueprint $table) {
             $table->id();
+            //llave foranea a device_id
+            $table->foreignId('device_id')
+                    ->constrained('devices')
+                    ->onDelete('restrict');
+            //segunda llave foranea a usuarios asignados, si se borra un usuario automaticamente lo elimina
+            $table->foreignId('assigned_user_id')
+                    ->nullable()
+                    ->constrained('users')
+                    ->nullOnDelete();
+
+            $table->string('type');
+            $table->string('status')->default('pendiente');
+            $table->text('description');
+            $table->string('priority');
             $table->timestamps();
         });
     }
