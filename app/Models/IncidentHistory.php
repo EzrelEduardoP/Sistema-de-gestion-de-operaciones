@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Operador extends Model
+class IncidentHistory extends Model
 {
     //
 }
