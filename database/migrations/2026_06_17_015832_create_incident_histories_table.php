@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('new_status');
             $table->string('old_status');
 
+            // Descripción del cambio del porque se cambio el estado
+            $table->text('description')->nullable();
+
             //se hizo una llave foranea para usuarios, para que se vea quien fue el usuario
             $table->foreignId('changed_by')
                     ->constrained('users')

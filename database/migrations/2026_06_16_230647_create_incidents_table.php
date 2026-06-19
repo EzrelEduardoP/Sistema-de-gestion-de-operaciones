@@ -22,12 +22,16 @@ return new class extends Migration
                     ->nullable()
                     ->constrained('users')
                     ->nullOnDelete();
+            
+            // Auditoría: quién creó la incidencia
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
             $table->string('type');
             $table->string('status')->default('pendiente');
             $table->text('description');
             $table->string('priority');
             $table->timestamps();
+            $table->softDeletes(); // Soft deletes para incidencias
         });
     }
 

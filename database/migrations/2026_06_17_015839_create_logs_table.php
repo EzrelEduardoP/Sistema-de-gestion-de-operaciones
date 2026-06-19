@@ -20,8 +20,18 @@ return new class extends Migration
 
             $table->string('action');
             $table->text('description');
-            $table->timestamps();
 
+            $table->string('model_type')->nullable();
+            $table->unsignedBigInteger('model_id')->nullable();
+            
+
+            $table->json('old_values')->nullable();
+            $table->json('new_values')->nullable();
+            
+            // IP del usuario que realizó la acción
+            $table->string('ip_address')->nullable();
+            
+            $table->timestamps();
         });
     }
 

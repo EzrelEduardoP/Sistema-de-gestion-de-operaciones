@@ -28,7 +28,13 @@ return new class extends Migration
 
             //el nullable es por que no todos los dispositivos tienen metadatos y permite que no se crea informacion adicional
             $table->json('metadata')->nullable();
+            
+            // Auditoría
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
+            
             $table->timestamps();
+            $table->softDeletes(); // Soft deletes para dispositivos
         });
     }
 

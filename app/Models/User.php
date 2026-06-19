@@ -37,6 +37,23 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    //un usuario tiene muchos dispositivos
+    public function devices(){
+        return $this->hasMany(Device::class, 'client_id');
+    }
+    //un usuario tiene muchos incidentes asignados
+    public function assignedIncidents(){
+        return $this->hasMany(Incident::class, 'assigned_user_id');
+    }
+    //un usuario tiene muchos cambios de historial
+    public function incidentsHistory(){
+        return $this->hasMany(IncidentHistory::class, 'changed_by');
+    }
+    //un usuario tiene muchos logs
+    public function logs(){
+        return $this->hasMany(Log::class, 'user_id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *
